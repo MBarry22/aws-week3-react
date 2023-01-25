@@ -46,3 +46,16 @@ async function addImage(filePath, description) {
   return await getImage(id);
 }
 exports.addImage = addImage;
+
+ async function deleteImage(id) {
+  let query = `
+    DELETE
+    FROM images
+    WHERE file_name = ?
+  `;
+
+  const [rows] = await pool.query(query, [id]);
+  const result = rows[0];
+  return result;
+}
+exports.deleteImage = deleteImage
